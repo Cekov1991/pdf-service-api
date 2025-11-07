@@ -1,0 +1,228 @@
+{
+  "info": {
+    "name": "PDF Service API",
+    "description": "Complete collection for PDF generation service endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "pdf-service-api"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/health",
+          "host": ["{{base_url}}"],
+          "path": ["api", "health"]
+        },
+        "description": "Check if the API is running"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Visit Report PDF",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"labels\": {\n      \"visit_report\": \"Visit Report\",\n      \"generated_on\": \"Generated on\",\n      \"patient_information\": \"Patient Information\",\n      \"full_name\": \"Full Name\",\n      \"dob\": \"Date of Birth\",\n      \"sex\": \"Sex\",\n      \"unique_master_citizen_number\": \"Citizen Number\",\n      \"phone\": \"Phone\",\n      \"email\": \"Email\",\n      \"visit_information\": \"Visit Information\",\n      \"scheduled_at\": \"Scheduled At\",\n      \"type\": \"Type\",\n      \"status\": \"Status\",\n      \"doctor\": \"Doctor\",\n      \"reason_for_visit\": \"Reason for Visit\",\n      \"anamnesis\": \"Anamnesis\",\n      \"chief_complaint\": \"Chief Complaint\",\n      \"history_of_present_illness\": \"History of Present Illness\",\n      \"past_medical_history\": \"Past Medical History\",\n      \"family_history\": \"Family History\",\n      \"medications_current\": \"Current Medications\",\n      \"allergies\": \"Allergies\",\n      \"therapy_in_use\": \"Therapy in Use\",\n      \"other_notes\": \"Other Notes\",\n      \"no_anamnesis_recorded\": \"No anamnesis recorded\",\n      \"examination\": \"Ophthalmic Examination\",\n      \"visus_od\": \"Visus OD (Right Eye)\",\n      \"visus_os\": \"Visus OS (Left Eye)\",\n      \"iop_od\": \"IOP OD\",\n      \"iop_os\": \"IOP OS\",\n      \"anterior_segment_findings_od\": \"Anterior Segment Findings OD\",\n      \"anterior_segment_findings_os\": \"Anterior Segment Findings OS\",\n      \"posterior_segment_findings_od\": \"Posterior Segment Findings OD\",\n      \"posterior_segment_findings_os\": \"Posterior Segment Findings OS\",\n      \"refraction_title\": \"Refraction Data\",\n      \"eye\": \"Eye\",\n      \"method\": \"Method\",\n      \"sphere\": \"Sphere\",\n      \"cylinder\": \"Cylinder\",\n      \"axis\": \"Axis\",\n      \"add_power\": \"Add Power\",\n      \"notes\": \"Notes\",\n      \"no_examination_recorded\": \"No examination recorded\",\n      \"diagnoses\": \"Diagnoses\",\n      \"code\": \"Code\",\n      \"term\": \"Term\",\n      \"onset_date\": \"Onset Date\",\n      \"is_primary\": \"Primary\",\n      \"yes\": \"Yes\",\n      \"no\": \"No\",\n      \"no_diagnoses_recorded\": \"No diagnoses recorded\",\n      \"imaging\": \"Imaging Studies\",\n      \"modality\": \"Modality\",\n      \"imaging_status\": \"Status\",\n      \"findings\": \"Findings\",\n      \"no_imaging_recorded\": \"No imaging studies recorded\",\n      \"treatments\": \"Treatment Plans\",\n      \"plan_type\": \"Plan Type\",\n      \"recommendation\": \"Recommendation\",\n      \"details\": \"Details\",\n      \"planned_date\": \"Planned Date\",\n      \"no_treatments_recorded\": \"No treatments recorded\",\n      \"prescriptions\": \"Prescriptions\",\n      \"prescription\": \"Prescription\",\n      \"medication_name\": \"Medication\",\n      \"dosage\": \"Dosage\",\n      \"frequency\": \"Frequency\",\n      \"duration\": \"Duration\",\n      \"instructions\": \"Instructions\",\n      \"no_prescriptions_recorded\": \"No prescriptions recorded\",\n      \"spectacles\": \"Spectacle Prescriptions\",\n      \"add\": \"Add\",\n      \"prism\": \"Prism\",\n      \"pd\": \"PD\",\n      \"no_spectacles_recorded\": \"No spectacle prescriptions recorded\",\n      \"doctor_signature\": \"Doctor's Signature\",\n      \"date\": \"Date\"\n    },\n    \"generated_at\": \"07/11/2025 14:30\",\n    \"current_date\": \"07/11/2025\",\n    \"patient\": {\n      \"full_name\": \"John Michael Doe\",\n      \"dob\": \"15/05/1985\",\n      \"sex\": \"Male\",\n      \"unique_master_citizen_number\": \"1234567890123\",\n      \"phone\": \"+1 (555) 123-4567\",\n      \"email\": \"john.doe@example.com\"\n    },\n    \"visit\": {\n      \"scheduled_at\": \"07/11/2025 10:30\",\n      \"type\": \"Regular Checkup\",\n      \"status\": \"Completed\",\n      \"reason_for_visit\": \"Annual eye examination and vision assessment\"\n    },\n    \"doctor\": {\n      \"name\": \"Dr. Sarah Michelle Johnson\"\n    },\n    \"anamnesis\": {\n      \"chief_complaint\": \"Blurred vision when reading, especially in low light conditions.\",\n      \"history_of_present_illness\": \"Patient has noticed progressive difficulty with near vision over the past 3 months.\",\n      \"past_medical_history\": \"Hypertension (controlled with medication), Type 2 Diabetes (diagnosed 2018)\",\n      \"family_history\": \"Mother had glaucoma, Father had macular degeneration\",\n      \"medications_current\": \"Metformin 500mg twice daily, Lisinopril 10mg once daily\",\n      \"allergies\": \"Penicillin (rash), Sulfa drugs (hives)\",\n      \"therapy_in_use\": \"Reading glasses +1.50\",\n      \"other_notes\": \"Patient is a software developer, spends 8-10 hours daily on computer.\"\n    },\n    \"ophthalmic_exam\": {\n      \"visus_od\": \"20/25\",\n      \"visus_os\": \"20/30\",\n      \"iop_od\": \"15 mmHg\",\n      \"iop_os\": \"16 mmHg\",\n      \"anterior_segment_findings_od\": \"Clear cornea, deep and quiet anterior chamber\",\n      \"anterior_segment_findings_os\": \"Clear cornea, deep and quiet anterior chamber\",\n      \"posterior_segment_findings_od\": \"Optic disc: Pink, well-defined margins, C/D ratio 0.3\",\n      \"posterior_segment_findings_os\": \"Optic disc: Pink, well-defined margins, C/D ratio 0.3\",\n      \"refractions\": [\n        {\n          \"eye\": \"OD (Right)\",\n          \"method\": \"Autorefraction\",\n          \"sphere\": \"+0.75\",\n          \"cylinder\": \"-0.50\",\n          \"axis\": \"90\",\n          \"add_power\": \"+2.00\",\n          \"notes\": \"Patient reports improved clarity at distance\"\n        },\n        {\n          \"eye\": \"OS (Left)\",\n          \"method\": \"Autorefraction\",\n          \"sphere\": \"+1.00\",\n          \"cylinder\": \"-0.75\",\n          \"axis\": \"85\",\n          \"add_power\": \"+2.00\",\n          \"notes\": \"Patient reports improved clarity at distance\"\n        }\n      ]\n    },\n    \"diagnoses\": [\n      {\n        \"code\": \"H52.4\",\n        \"term\": \"Presbyopia\",\n        \"onset_date\": \"15/08/2025\",\n        \"is_primary\": true,\n        \"notes\": \"Age-related loss of accommodation\"\n      },\n      {\n        \"code\": \"H25.11\",\n        \"term\": \"Age-related nuclear cataract, left eye\",\n        \"onset_date\": \"07/11/2025\",\n        \"is_primary\": false,\n        \"notes\": \"Early stage, monitor progression\"\n      }\n    ],\n    \"imaging_studies\": [\n      {\n        \"modality\": \"OCT (Optical Coherence Tomography)\",\n        \"eye\": \"Both Eyes\",\n        \"status\": \"Completed\",\n        \"findings\": \"Normal macular thickness bilaterally. No signs of diabetic macular edema.\"\n      }\n    ],\n    \"treatment_plans\": [\n      {\n        \"plan_type\": \"Optical Correction\",\n        \"recommendation\": \"New spectacle prescription for progressive lenses\",\n        \"details\": \"Patient requires updated prescription for both distance and near vision.\",\n        \"start_date\": \"07/11/2025\"\n      }\n    ],\n    \"prescriptions\": [\n      {\n        \"notes\": \"For dry eye symptoms associated with prolonged computer use\",\n        \"prescription_items\": [\n          {\n            \"medication_name\": \"Artificial Tears (Preservative-free)\",\n            \"dosage\": \"1-2 drops\",\n            \"frequency\": \"4 times daily\",\n            \"duration\": \"Ongoing\",\n            \"instructions\": \"Use before computer work and as needed for dryness\"\n          }\n        ]\n      }\n    ],\n    \"spectacle_prescriptions\": [\n      {\n        \"eye\": \"OD (Right)\",\n        \"sphere\": \"+0.75\",\n        \"cylinder\": \"-0.50\",\n        \"axis\": \"90\",\n        \"add_power\": \"+2.00\",\n        \"prism\": \"—\",\n        \"pupillary_distance\": \"32mm\"\n      },\n      {\n        \"eye\": \"OS (Left)\",\n        \"sphere\": \"+1.00\",\n        \"cylinder\": \"-0.75\",\n        \"axis\": \"85\",\n        \"add_power\": \"+2.00\",\n        \"prism\": \"—\",\n        \"pupillary_distance\": \"32mm\"\n      }\n    ]\n  },\n  \"options\": {\n    \"format\": \"A4\",\n    \"landscape\": false\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/pdf/visit-report",
+          "host": ["{{base_url}}"],
+          "path": ["api", "pdf", "visit-report"]
+        },
+        "description": "Generate a medical visit report PDF with patient data, examination results, diagnoses, and treatments"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate PDF from Template (Generic)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"template\": \"visit-report\",\n  \"data\": {\n    \"labels\": {\n      \"visit_report\": \"Visit Report\",\n      \"generated_on\": \"Generated on\",\n      \"patient_information\": \"Patient Information\"\n    },\n    \"patient\": {\n      \"full_name\": \"Jane Doe\",\n      \"dob\": \"10/03/1990\",\n      \"sex\": \"Female\"\n    },\n    \"visit\": {\n      \"scheduled_at\": \"07/11/2025 14:00\",\n      \"type\": \"Follow-up\",\n      \"status\": \"Completed\"\n    },\n    \"doctor\": {\n      \"name\": \"Dr. John Smith\"\n    },\n    \"generated_at\": \"07/11/2025 15:30\",\n    \"current_date\": \"07/11/2025\"\n  },\n  \"options\": {\n    \"format\": \"A4\",\n    \"landscape\": false,\n    \"margin\": {\n      \"top\": \"10mm\",\n      \"right\": \"10mm\",\n      \"bottom\": \"10mm\",\n      \"left\": \"10mm\"\n    }\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/pdf/generate",
+          "host": ["{{base_url}}"],
+          "path": ["api", "pdf", "generate"]
+        },
+        "description": "Generic endpoint to generate PDF from any template by specifying template name"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate PDF from HTML",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"html\": \"<!DOCTYPE html><html><head><title>Test PDF</title><style>body{font-family:Arial;padding:20px;}h1{color:#4f46e5;}</style></head><body><h1>Hello from PDF Service!</h1><p>This is a test PDF generated from raw HTML.</p><ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul></body></html>\",\n  \"options\": {\n    \"format\": \"A4\",\n    \"landscape\": false\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/pdf/from-html",
+          "host": ["{{base_url}}"],
+          "path": ["api", "pdf", "from-html"]
+        },
+        "description": "Generate PDF directly from raw HTML string"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate PDF from URL",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"options\": {\n    \"format\": \"A4\",\n    \"landscape\": false\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/pdf/from-url",
+          "host": ["{{base_url}}"],
+          "path": ["api", "pdf", "from-url"]
+        },
+        "description": "Generate PDF from a URL"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Visit Report - Minimal Data",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"labels\": {\n      \"visit_report\": \"Medical Visit Report\",\n      \"generated_on\": \"Generated on\",\n      \"patient_information\": \"Patient Information\",\n      \"full_name\": \"Full Name\",\n      \"visit_information\": \"Visit Information\",\n      \"scheduled_at\": \"Scheduled At\",\n      \"doctor\": \"Doctor\",\n      \"anamnesis\": \"Anamnesis\",\n      \"no_anamnesis_recorded\": \"No anamnesis recorded\",\n      \"examination\": \"Examination\",\n      \"no_examination_recorded\": \"No examination recorded\",\n      \"diagnoses\": \"Diagnoses\",\n      \"no_diagnoses_recorded\": \"No diagnoses recorded\",\n      \"imaging\": \"Imaging\",\n      \"no_imaging_recorded\": \"No imaging recorded\",\n      \"treatments\": \"Treatments\",\n      \"no_treatments_recorded\": \"No treatments recorded\",\n      \"prescriptions\": \"Prescriptions\",\n      \"no_prescriptions_recorded\": \"No prescriptions recorded\",\n      \"spectacles\": \"Spectacles\",\n      \"no_spectacles_recorded\": \"No spectacles recorded\",\n      \"doctor_signature\": \"Doctor's Signature\",\n      \"date\": \"Date\"\n    },\n    \"generated_at\": \"07/11/2025 16:00\",\n    \"current_date\": \"07/11/2025\",\n    \"patient\": {\n      \"full_name\": \"Test Patient\"\n    },\n    \"visit\": {\n      \"scheduled_at\": \"07/11/2025 16:00\"\n    },\n    \"doctor\": {\n      \"name\": \"Dr. Test\"\n    }\n  },\n  \"options\": {\n    \"format\": \"A4\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/pdf/visit-report",
+          "host": ["{{base_url}}"],
+          "path": ["api", "pdf", "visit-report"]
+        },
+        "description": "Generate visit report with minimal required data (good for testing empty states)"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate PDF - Letter Format",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"html\": \"<!DOCTYPE html><html><head><title>Letter Format Test</title><style>body{font-family:Arial;padding:40px;}h1{text-align:center;}</style></head><body><h1>Letter Format PDF</h1><p>This PDF uses US Letter format instead of A4.</p></body></html>\",\n  \"options\": {\n    \"format\": \"Letter\",\n    \"landscape\": false\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/pdf/from-html",
+          "host": ["{{base_url}}"],
+          "path": ["api", "pdf", "from-html"]
+        },
+        "description": "Test PDF generation with Letter format (US standard)"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate PDF - Landscape",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"html\": \"<!DOCTYPE html><html><head><title>Landscape Test</title><style>body{font-family:Arial;padding:40px;}h1{text-align:center;color:#4f46e5;}</style></head><body><h1>Landscape Orientation PDF</h1><p>This PDF is in landscape mode, useful for wide tables or charts.</p></body></html>\",\n  \"options\": {\n    \"format\": \"A4\",\n    \"landscape\": true\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/pdf/from-html",
+          "host": ["{{base_url}}"],
+          "path": ["api", "pdf", "from-html"]
+        },
+        "description": "Test PDF generation with landscape orientation"
+      },
+      "response": []
+    }
+  ]
+}
+

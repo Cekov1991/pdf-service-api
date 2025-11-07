@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{labels.visit_report}} - {{patient.full_name}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DejaVu Sans', Arial, sans-serif;
+            font-size: 8pt;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #4f46e5;
+        }
+
+        .header h1 {
+            font-size: 20pt;
+            color: #4f46e5;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            font-size: 8pt;
+            color: #6b7280;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #4f46e5;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .grid {
+            display: table;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .grid-row {
+            display: table-row;
+        }
+
+        .grid-col {
+            display: table-cell;
+            padding: 5px 10px 5px 0;
+            vertical-align: top;
+        }
+
+        .grid-col-2 {
+            width: 50%;
+        }
+
+        .grid-col-3 {
+            width: 33.333%;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #374151;
+            font-size: 8pt;
+        }
+
+        .value {
+            color: #1f2937;
+            margin-top: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table th {
+            background-color: #f3f4f6;
+            color: #374151;
+            font-weight: bold;
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 8pt;
+        }
+
+        table td {
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            font-size: 8pt;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .empty-state {
+            color: #9ca3af;
+            font-style: italic;
+            padding: 10px;
+            background-color: #f9fafb;
+            border-radius: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+
+        .badge-primary {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-success {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-warning {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+            font-size: 9pt;
+            color: #6b7280;
+        }
+
+        .signature-area {
+            margin-top: 50px;
+            display: table;
+            width: 100%;
+        }
+
+        .signature-box {
+            display: table-cell;
+            width: 50%;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .signature-line {
+            border-top: 1px solid #000;
+            margin-top: 40px;
+            padding-top: 5px;
+        }
+
+        .text-content {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>{{labels.visit_report}}</h1>
+        <div class="subtitle">{{labels.generated_on}}: {{generated_at}}</div>
+    </div>
+
+    <!-- Patient Demographics -->
+    <div class="section">
+        <h2 class="section-title">{{labels.patient_information}}</h2>
+        <div class="grid">
+            <div class="grid-row">
+                <div class="grid-col grid-col-2">
+                    <div class="label">{{labels.full_name}}</div>
+                    <div class="value">{{patient.full_name}}</div>
+                </div>
+                <div class="grid-col grid-col-2">
+                    <div class="label">{{labels.dob}}</div>
+                    <div class="value">{{#if patient.dob}}{{patient.dob}}{{else}}—{{/if}}</div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="grid-col grid-col-2">
+                    <div class="label">{{labels.sex}}</div>
+                    <div class="value">{{patient.sex}}</div>
+                </div>
+                <div class="grid-col grid-col-2">
+                    <div class="label">{{labels.unique_master_citizen_number}}</div>
+                    <div class="value">{{#if patient.unique_master_citizen_number}}{{patient.unique_master_citizen_number}}{{else}}—{{/if}}</div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="grid-col grid-col-2">
+                    <div class="label">{{labels.phone}}</div>
+                    <div class="value">{{#if patient.phone}}{{patient.phone}}{{else}}—{{/if}}</div>
+                </div>
+                <div class="grid-col grid-col-2">
+                    <div class="label">{{labels.email}}</div>
+                    <div class="value">{{#if patient.email}}{{patient.email}}{{else}}—{{/if}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Visit Information -->
+    <div class="section">
+        <h2 class="section-title">{{labels.visit_information}}</h2>
+        <div class="grid">
+            <div class="grid-row">
+                <div class="grid-col grid-col-3">
+                    <div class="label">{{labels.scheduled_at}}</div>
+                    <div class="value">{{visit.scheduled_at}}</div>
+                </div>
+                <div class="grid-col grid-col-3">
+                    <div class="label">{{labels.type}}</div>
+                    <div class="value">{{visit.type}}</div>
+                </div>
+                <div class="grid-col grid-col-3">
+                    <div class="label">{{labels.status}}</div>
+                    <div class="value">{{visit.status}}</div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="grid-col grid-col-2">
+                    <div class="label">{{labels.doctor}}</div>
+                    <div class="value">{{doctor.name}}</div>
+                </div>
+                <div class="grid-col grid-col-2">
+                    <div class="label">{{labels.reason_for_visit}}</div>
+                    <div class="value">{{#if visit.reason_for_visit}}{{visit.reason_for_visit}}{{else}}—{{/if}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Anamnesis -->
+    <div class="section">
+        <h2 class="section-title">{{labels.anamnesis}}</h2>
+        {{#if anamnesis}}
+            <div class="grid">
+                {{#if anamnesis.chief_complaint}}
+                    <div class="grid-row">
+                        <div class="grid-col">
+                            <div class="label">{{labels.chief_complaint}}</div>
+                            <div class="value text-content">{{anamnesis.chief_complaint}}</div>
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if anamnesis.history_of_present_illness}}
+                    <div class="grid-row">
+                        <div class="grid-col">
+                            <div class="label">{{labels.history_of_present_illness}}</div>
+                            <div class="value text-content">{{anamnesis.history_of_present_illness}}</div>
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if anamnesis.past_medical_history}}
+                    <div class="grid-row">
+                        <div class="grid-col">
+                            <div class="label">{{labels.past_medical_history}}</div>
+                            <div class="value text-content">{{anamnesis.past_medical_history}}</div>
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if anamnesis.family_history}}
+                    <div class="grid-row">
+                        <div class="grid-col">
+                            <div class="label">{{labels.family_history}}</div>
+                            <div class="value text-content">{{anamnesis.family_history}}</div>
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if anamnesis.medications_current}}
+                    <div class="grid-row">
+                        <div class="grid-col">
+                            <div class="label">{{labels.medications_current}}</div>
+                            <div class="value text-content">{{anamnesis.medications_current}}</div>
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if anamnesis.allergies}}
+                    <div class="grid-row">
+                        <div class="grid-col">
+                            <div class="label">{{labels.allergies}}</div>
+                            <div class="value text-content">{{anamnesis.allergies}}</div>
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if anamnesis.therapy_in_use}}
+                    <div class="grid-row">
+                        <div class="grid-col">
+                            <div class="label">{{labels.therapy_in_use}}</div>
+                            <div class="value text-content">{{anamnesis.therapy_in_use}}</div>
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if anamnesis.other_notes}}
+                    <div class="grid-row">
+                        <div class="grid-col">
+                            <div class="label">{{labels.other_notes}}</div>
+                            <div class="value text-content">{{anamnesis.other_notes}}</div>
+                        </div>
+                    </div>
+                {{/if}}
+            </div>
+        {{else}}
+            <div class="empty-state">{{labels.no_anamnesis_recorded}}</div>
+        {{/if}}
+    </div>
+
+    <!-- Ophthalmic Examination -->
+    <div class="section">
+        <h2 class="section-title">{{labels.examination}}</h2>
+        {{#if ophthalmic_exam}}
+            <div class="grid">
+                <div class="grid-row">
+                    <div class="grid-col grid-col-2">
+                        <div class="label">{{labels.visus_od}}</div>
+                        <div class="value">{{#if ophthalmic_exam.visus_od}}{{ophthalmic_exam.visus_od}}{{else}}—{{/if}}</div>
+                    </div>
+                    <div class="grid-col grid-col-2">
+                        <div class="label">{{labels.visus_os}}</div>
+                        <div class="value">{{#if ophthalmic_exam.visus_os}}{{ophthalmic_exam.visus_os}}{{else}}—{{/if}}</div>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-col grid-col-2">
+                        <div class="label">{{labels.iop_od}}</div>
+                        <div class="value">{{#if ophthalmic_exam.iop_od}}{{ophthalmic_exam.iop_od}}{{else}}—{{/if}}</div>
+                    </div>
+                    <div class="grid-col grid-col-2">
+                        <div class="label">{{labels.iop_os}}</div>
+                        <div class="value">{{#if ophthalmic_exam.iop_os}}{{ophthalmic_exam.iop_os}}{{else}}—{{/if}}</div>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    {{#if ophthalmic_exam.anterior_segment_findings_od}}
+                        <div class="grid-col grid-col-2">
+                            <div class="label">{{labels.anterior_segment_findings_od}}</div>
+                            <div class="value text-content">{{ophthalmic_exam.anterior_segment_findings_od}}</div>
+                        </div>
+                    {{/if}}
+
+                    {{#if ophthalmic_exam.anterior_segment_findings_os}}
+                        <div class="grid-col grid-col-2">
+                            <div class="label">{{labels.anterior_segment_findings_os}}</div>
+                            <div class="value text-content">{{ophthalmic_exam.anterior_segment_findings_os}}</div>
+                        </div>
+                    {{/if}}
+                </div>
+
+                <div class="grid-row">
+                    {{#if ophthalmic_exam.posterior_segment_findings_od}}
+                        <div class="grid-col grid-col-2">
+                            <div class="label">{{labels.posterior_segment_findings_od}}</div>
+                            <div class="value text-content">{{ophthalmic_exam.posterior_segment_findings_od}}</div>
+                        </div>
+                    {{/if}}
+
+                    {{#if ophthalmic_exam.posterior_segment_findings_os}}
+                        <div class="grid-col grid-col-2">
+                            <div class="label">{{labels.posterior_segment_findings_os}}</div>
+                            <div class="value text-content">{{ophthalmic_exam.posterior_segment_findings_os}}</div>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+
+            <!-- Refraction Data -->
+            {{#if ophthalmic_exam.refractions}}
+                {{#if ophthalmic_exam.refractions.length}}
+                    <h3 style="margin-top: 15px; margin-bottom: 10px; font-size: 12pt;">{{labels.refraction_title}}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>{{labels.eye}}</th>
+                                <th>{{labels.method}}</th>
+                                <th>{{labels.sphere}}</th>
+                                <th>{{labels.cylinder}}</th>
+                                <th>{{labels.axis}}</th>
+                                <th>{{labels.add_power}}</th>
+                                <th>{{labels.notes}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each ophthalmic_exam.refractions}}
+                                <tr>
+                                    <td>{{this.eye}}</td>
+                                    <td>{{#if this.method}}{{this.method}}{{else}}—{{/if}}</td>
+                                    <td>{{#if this.sphere}}{{this.sphere}}{{else}}—{{/if}}</td>
+                                    <td>{{#if this.cylinder}}{{this.cylinder}}{{else}}—{{/if}}</td>
+                                    <td>{{#if this.axis}}{{this.axis}}{{else}}—{{/if}}</td>
+                                    <td>{{#if this.add_power}}{{this.add_power}}{{else}}—{{/if}}</td>
+                                    <td>{{#if this.notes}}{{this.notes}}{{else}}—{{/if}}</td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                {{/if}}
+            {{/if}}
+        {{else}}
+            <div class="empty-state">{{labels.no_examination_recorded}}</div>
+        {{/if}}
+    </div>
+
+    <!-- Diagnoses -->
+    <div class="section">
+        <h2 class="section-title">{{labels.diagnoses}}</h2>
+        {{#if diagnoses}}
+            {{#if diagnoses.length}}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{labels.code}}</th>
+                            <th>{{labels.term}}</th>
+                            <th>{{labels.onset_date}}</th>
+                            <th>{{labels.is_primary}}</th>
+                            <th>{{labels.notes}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each diagnoses}}
+                            <tr>
+                                <td>{{#if this.code}}{{this.code}}{{else}}—{{/if}}</td>
+                                <td>{{this.term}}</td>
+                                <td>{{#if this.onset_date}}{{this.onset_date}}{{else}}—{{/if}}</td>
+                                <td>{{#if this.is_primary}}{{../labels.yes}}{{else}}{{../labels.no}}{{/if}}</td>
+                                <td>{{#if this.notes}}{{this.notes}}{{else}}—{{/if}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <div class="empty-state">{{labels.no_diagnoses_recorded}}</div>
+            {{/if}}
+        {{else}}
+            <div class="empty-state">{{labels.no_diagnoses_recorded}}</div>
+        {{/if}}
+    </div>
+
+    <!-- Imaging Studies -->
+    <div class="section">
+        <h2 class="section-title">{{labels.imaging}}</h2>
+        {{#if imaging_studies}}
+            {{#if imaging_studies.length}}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{labels.modality}}</th>
+                            <th>{{labels.eye}}</th>
+                            <th>{{labels.imaging_status}}</th>
+                            <th>{{labels.findings}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each imaging_studies}}
+                            <tr>
+                                <td>{{this.modality}}</td>
+                                <td>{{this.eye}}</td>
+                                <td>{{this.status}}</td>
+                                <td>{{#if this.findings}}{{this.findings}}{{else}}—{{/if}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <div class="empty-state">{{labels.no_imaging_recorded}}</div>
+            {{/if}}
+        {{else}}
+            <div class="empty-state">{{labels.no_imaging_recorded}}</div>
+        {{/if}}
+    </div>
+
+    <!-- Treatment Plans -->
+    <div class="section">
+        <h2 class="section-title">{{labels.treatments}}</h2>
+        {{#if treatment_plans}}
+            {{#if treatment_plans.length}}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{labels.plan_type}}</th>
+                            <th>{{labels.recommendation}}</th>
+                            <th>{{labels.details}}</th>
+                            <th>{{labels.planned_date}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each treatment_plans}}
+                            <tr>
+                                <td>{{this.plan_type}}</td>
+                                <td>{{this.recommendation}}</td>
+                                <td>{{#if this.details}}{{this.details}}{{else}}—{{/if}}</td>
+                                <td>{{#if this.start_date}}{{this.start_date}}{{else}}—{{/if}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <div class="empty-state">{{labels.no_treatments_recorded}}</div>
+            {{/if}}
+        {{else}}
+            <div class="empty-state">{{labels.no_treatments_recorded}}</div>
+        {{/if}}
+    </div>
+
+    <!-- Prescriptions -->
+    <div class="section">
+        <h2 class="section-title">{{labels.prescriptions}}</h2>
+        {{#if prescriptions}}
+            {{#if prescriptions.length}}
+                {{#each prescriptions}}
+                    <div style="margin-bottom: 15px;">
+                        <strong>{{labels.prescription}} #{{@index}}</strong>
+                        {{#if this.notes}}
+                            <div style="margin-top: 5px; font-style: italic; color: #6b7280;">{{this.notes}}</div>
+                        {{/if}}
+                        <table style="margin-top: 10px;">
+                            <thead>
+                                <tr>
+                                    <th>{{../labels.medication_name}}</th>
+                                    <th>{{../labels.dosage}}</th>
+                                    <th>{{../labels.frequency}}</th>
+                                    <th>{{../labels.duration}}</th>
+                                    <th>{{../labels.instructions}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each this.prescription_items}}
+                                    <tr>
+                                        <td>{{this.medication_name}}</td>
+                                        <td>{{#if this.dosage}}{{this.dosage}}{{else}}—{{/if}}</td>
+                                        <td>{{#if this.frequency}}{{this.frequency}}{{else}}—{{/if}}</td>
+                                        <td>{{#if this.duration}}{{this.duration}}{{else}}—{{/if}}</td>
+                                        <td>{{#if this.instructions}}{{this.instructions}}{{else}}—{{/if}}</td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="empty-state">{{labels.no_prescriptions_recorded}}</div>
+            {{/if}}
+        {{else}}
+            <div class="empty-state">{{labels.no_prescriptions_recorded}}</div>
+        {{/if}}
+    </div>
+
+    <!-- Spectacle Prescriptions -->
+    <div class="section">
+        <h2 class="section-title">{{labels.spectacles}}</h2>
+        {{#if spectacle_prescriptions}}
+            {{#if spectacle_prescriptions.length}}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{labels.eye}}</th>
+                            <th>{{labels.sphere}}</th>
+                            <th>{{labels.cylinder}}</th>
+                            <th>{{labels.axis}}</th>
+                            <th>{{labels.add}}</th>
+                            <th>{{labels.prism}}</th>
+                            <th>{{labels.pd}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each spectacle_prescriptions}}
+                            <tr>
+                                <td>{{this.eye}}</td>
+                                <td>{{#if this.sphere}}{{this.sphere}}{{else}}—{{/if}}</td>
+                                <td>{{#if this.cylinder}}{{this.cylinder}}{{else}}—{{/if}}</td>
+                                <td>{{#if this.axis}}{{this.axis}}{{else}}—{{/if}}</td>
+                                <td>{{#if this.add_power}}{{this.add_power}}{{else}}—{{/if}}</td>
+                                <td>{{#if this.prism}}{{this.prism}}{{else}}—{{/if}}</td>
+                                <td>{{#if this.pupillary_distance}}{{this.pupillary_distance}}{{else}}—{{/if}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <div class="empty-state">{{labels.no_spectacles_recorded}}</div>
+            {{/if}}
+        {{else}}
+            <div class="empty-state">{{labels.no_spectacles_recorded}}</div>
+        {{/if}}
+    </div>
+
+    <!-- Footer with Signature -->
+    <div class="footer">
+        <div class="signature-area">
+            <div class="signature-box">
+                <div class="signature-line">
+                    {{labels.doctor_signature}}<br>
+                    {{doctor.name}}
+                </div>
+            </div>
+            <div class="signature-box">
+                <div class="signature-line">
+                    {{labels.date}}<br>
+                    {{current_date}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

@@ -1,0 +1,17 @@
+{
+  "generate_pdf": "Генерирај PDF",
+  "visit_report": "Извештај",
+  "generated_on": "Генериран на",
+  "patient_information": "Информации за пациентот",
+  "visit_information": "Информации за визитата",
+  "doctor_signature": "Потпис на доктор",
+  "date": "Датум",
+  "report_validation": "Овој извештај е електронски генериран и важечки без потпис.",
+  "no_anamnesis_recorded": "Нема забележана анамнеза за оваа визита.",
+  "no_examination_recorded": "Нема забележан преглед за оваа визита.",
+  "no_diagnoses_recorded": "Нема забележани дијагнози за оваа визита.",
+  "no_imaging_recorded": "Нема забележани студии за сликање за оваа визита.",
+  "no_treatments_recorded": "Нема забележани планови за третман за оваа визита.",
+  "no_prescriptions_recorded": "Нема забележани рецепти за оваа визита.",
+  "no_spectacles_recorded": "Нема забележани рецепти за очила за оваа визита."
+}
