@@ -122,16 +122,27 @@
         <h1>📄 PDF Base64 Viewer</h1>
         
         <div class="info">
-            <strong>Instructions:</strong> Paste the base64 string from your Postman response into the textarea below, then click "View PDF" to see the PDF or "Download PDF" to save it.
+            <strong>Instructions:</strong> Paste either the full JSON response OR just the base64 string from your Postman response into the textarea below, then click "View PDF" to see the PDF or "Download PDF" to save it.
         </div>
 
         <div class="error" id="errorMsg"></div>
         <div class="success" id="successMsg"></div> 
 
-        <div class="input-group"> 
-            <label for="base64Input">Base64 String:</label>
+        <div class="input-group">
+            <label for="base64Input">Paste Full JSON Response from API (or just base64 string):</label>
             <textarea 
-                id="base64Input" 
+                id="base64Input"
+                placeholder='Paste the entire JSON response from Postman, e.g.:
+{
+  "success": true,
+  "data": {
+    "base64": "JVBERi0...",
+    "mimeType": "application/pdf",
+    "size": 1115348,
+    "format": "A4",
+    "filename": "anamnesis-john-michael-doe-2025-11-16.pdf"
+  }
+}'
             ></textarea>
         </div>
 
@@ -145,6 +156,8 @@
     </div>
 
     <script>
+        let currentFilename = null;
+
         function showError(message) {
             const errorDiv = document.getElementById('errorMsg');
             errorDiv.textContent = message;
@@ -161,6 +174,26 @@
             setTimeout(() => {
                 successDiv.style.display = 'none';
             }, 3000);
+        }
+
+        function parseInput(input) {
+            // Try to parse as JSON first
+            try {
+                const json = JSON.parse(input);
+                if (json.data && json.data.base64) {
+                    currentFilename = json.data.filename || null;
+                    console.log('Extracted filename:', currentFilename);
+                    console.log('Full response:', json);
+                    return json.data.base64;
+                }
+            } catch (e) {
+                // Not JSON, treat as base64 string
+                console.log('Not JSON, treating as base64 string');
+            }
+            
+            // Return as-is (assuming it's base64)
+            currentFilename = null;
+            return input;
         }
 
         function base64ToBlob(base64) {
@@ -180,15 +213,16 @@
         }
 
         function viewPDF() {
-            const base64Input = document.getElementById('base64Input').value.trim();
+            const input = document.getElementById('base64Input').value.trim();
             
-            if (!base64Input) {
-                showError('Please paste a base64 string first!');
+            if (!input) {
+                showError('Please paste a base64 string or JSON response first!');
                 return;
             }
 
             try {
-                const blob = base64ToBlob(base64Input);
+                const base64 = parseInput(input);
+                const blob = base64ToBlob(base64);
                 const url = URL.createObjectURL(blob);
                 const viewer = document.getElementById('pdfViewer');
                 
@@ -202,27 +236,31 @@
         }
 
         function downloadPDF() {
-            const base64Input = document.getElementById('base64Input').value.trim();
+            const input = document.getElementById('base64Input').value.trim();
             
-            if (!base64Input) {
-                showError('Please paste a base64 string first!');
+            if (!input) {
+                showError('Please paste a base64 string or JSON response first!');
                 return;
             }
 
             try {
-                const blob = base64ToBlob(base64Input);
+                const base64 = parseInput(input);
+                const blob = base64ToBlob(base64);
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 
+                // Use filename from API response if available, otherwise generate one
+                const filename = currentFilename || `document-${Date.now()}.pdf`;
+                
                 a.href = url;
-                a.download = `visit-report-${Date.now()}.pdf`;
+                a.download = filename;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
                 
                 URL.revokeObjectURL(url);
                 
-                showSuccess('PDF downloaded successfully! 📥');
+                showSuccess(`PDF downloaded as: ${filename} 📥`);
             } catch (error) {
                 showError(error.message);
             }
@@ -232,6 +270,7 @@
             document.getElementById('base64Input').value = '';
             document.getElementById('pdfViewer').style.display = 'none';
             document.getElementById('pdfViewer').src = '';
+            currentFilename = null;
             showSuccess('Cleared! Ready for a new PDF.');
         }
     </script>

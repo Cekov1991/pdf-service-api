@@ -8,7 +8,7 @@ A professional PDF generation service built with Node.js, Express, and Puppeteer
 - 🚀 **High Performance** - Reuses browser instances for optimal performance
 - 📄 **Multiple Input Methods** - Generate from templates, raw HTML, or URLs
 - 🔒 **Secure** - Built-in rate limiting, CORS, and security headers
-- 📦 **Base64 Output** - Returns PDFs as base64 strings (easily extensible to other formats)
+- 📦 **Base64 Output** - Returns PDFs as base64 strings with smart filenames (template-patient-date.pdf)
 - 🎯 **Easy to Extend** - Clean architecture for adding new templates
 - 🏥 **Medical Document Ready** - Includes comprehensive visit report template
 - 📁 **Flexible Template Organization** - Support for folder-based template structure with new payload format
@@ -120,7 +120,8 @@ See `examples/visit-report-payload-new-format.json` for a complete example with 
     "base64": "JVBERi0xLjcKCjEgMCBvYmo...",
     "mimeType": "application/pdf",
     "size": 245678,
-    "format": "A4"
+    "format": "A4",
+    "filename": "anamnesis-john-michael-doe-2025-11-16.pdf"
   }
 }
 ```
@@ -155,6 +156,16 @@ POST /api/pdf/generate
 ```
 
 📖 **See [NEW-PAYLOAD-FORMAT.md](NEW-PAYLOAD-FORMAT.md) for detailed documentation on the payload structure.**
+
+#### 📁 Generated Filenames
+
+The API automatically generates meaningful filenames in the format:
+- `{template-id}-{patient-name}-{date}.pdf` - when patient data is available
+- `{template-id}-report-{date}.pdf` - when no patient data is provided
+
+Example: `anamnesis-john-michael-doe-2025-11-16.pdf`
+
+The `filename` field is included in the API response and can be used by your client application when saving the PDF file.
 
 ---
 

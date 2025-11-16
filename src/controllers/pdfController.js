@@ -50,6 +50,22 @@ class PDFController {
       // Generate PDF
       const result = await this.pdfService.generateFromHTML(html, options || {});
 
+      // Generate a meaningful filename
+      const timestamp = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+      let filename = `${id}-report`;
+      
+      // Add patient name if available
+      if (data.patient && data.patient.full_name) {
+        const patientName = data.patient.full_name.replace(/\s+/g, '-').toLowerCase();
+        filename = `${id}-${patientName}`;
+      }
+      
+      // Add timestamp
+      filename = `${filename}-${timestamp}.pdf`;
+
+      // Add filename to response
+      result.data.filename = filename;
+
       res.json(result);
     } catch (error) {
       console.error('Error generating PDF:', error);
