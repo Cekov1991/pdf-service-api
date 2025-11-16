@@ -4,6 +4,8 @@ import helmet from 'helmet';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import routes from './routes/pdfRoutes.js';
 import { errorHandler, notFoundHandler } from './middlewares/errorHandler.js';
 import { validatePayloadSize, validatePDFOptions } from './middlewares/validation.js';
@@ -11,11 +13,24 @@ import { validatePayloadSize, validatePDFOptions } from './middlewares/validatio
 // Load environment variables
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security middleware
-app.use(helmet());
+// Security middleware (with relaxed CSP for development tools)
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdnjs.cloudflare.com"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+      },
+    },
+  })
+);
 
 // CORS configuration
 app.use(
@@ -51,10 +66,7 @@ app.use('/api/', limiter);
 app.use(validatePayloadSize);
 app.use(validatePDFOptions);
 
-// Routes
-app.use('/api', routes);
-
-// Welcome endpoint
+// Welcome endpoint (before static files to take precedence)
 app.get('/', (req, res) => {
   res.json({
     success: true,
@@ -63,13 +75,20 @@ app.get('/', (req, res) => {
     endpoints: {
       health: 'GET /api/health',
       generate: 'POST /api/pdf/generate',
-      visitReport: 'POST /api/pdf/visit-report',
-      fromHTML: 'POST /api/pdf/from-html',
-      fromURL: 'POST /api/pdf/from-url',
+    },
+    tools: {
+      templateViewer: 'GET /template-viewer.html',
+      pdfViewer: 'GET /test-pdf-viewer.html',
     },
     documentation: 'See README.md for usage instructions',
   });
 });
+
+// Routes
+app.use('/api', routes);
+
+// Serve static files (for template-viewer.html and templates)
+app.use(express.static(path.join(__dirname, '..')));
 
 // 404 handler
 app.use(notFoundHandler);
