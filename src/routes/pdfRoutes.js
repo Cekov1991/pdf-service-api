@@ -16,15 +16,6 @@ router.post(
   (req, res) => pdfController.generatePDF(req, res)
 );
 
-// Specific template endpoints
-router.post(
-  '/pdf/visit-report',
-  validatePayloadSize,
-  validateTemplateSpecs,
-  validatePDFOptions,
-  (req, res) => pdfController.generateVisitReport(req, res)
-);
-
 // Generate from raw HTML
 router.post(
   '/pdf/from-html',

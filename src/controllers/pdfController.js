@@ -61,58 +61,6 @@ class PDFController {
   }
 
   /**
-   * Generate visit report PDF
-   * POST /api/pdf/visit-report
-   * 
-   * Payload format:
-   * { template_specifications: { folder, id, locale }, data: {...}, options: {...} }
-   */
-  async generateVisitReport(req, res) {
-    try {
-      const { template_specifications, data, options } = req.body;
-
-      if (!template_specifications) {
-        return res.status(400).json({
-          success: false,
-          error: 'template_specifications is required',
-        });
-      }
-
-      if (!data) {
-        return res.status(400).json({
-          success: false,
-          error: 'Data is required',
-        });
-      }
-
-      const { id, folder, locale } = template_specifications;
-
-      // Load translations if locale is provided and labels don't exist in data
-      // This allows embedded labels in payload to take precedence
-      const selectedLocale = locale || 'en';
-      if (!data.labels) {
-        const translations = await this.translationService.getTranslations(selectedLocale);
-        data.labels = translations;
-      }
-
-      // Load and compile template
-      const compiledTemplate = await loadTemplate(id, folder);
-      const html = compiledTemplate(data);
-
-      // Generate PDF
-      const result = await this.pdfService.generateFromHTML(html, options || {});
-
-      res.json(result);
-    } catch (error) {
-      console.error('Error generating visit report:', error);
-      res.status(500).json({
-        success: false,
-        error: error.message || 'Failed to generate visit report',
-      });
-    }
-  }
-
-  /**
    * Generate PDF from raw HTML
    * POST /api/pdf/from-html
    */
