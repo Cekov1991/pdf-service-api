@@ -11,16 +11,19 @@ class PDFController {
   /**
    * Generate PDF from a specific template
    * POST /api/pdf/generate
+   * 
+   * Payload format:
+   * { template_specifications: { folder, id, locale }, data: {...}, options: {...} }
    */
   async generatePDF(req, res) {
     try {
-      const { template, data, options, locale } = req.body;
+      const { template_specifications, data, options } = req.body;
 
       // Validation
-      if (!template) {
+      if (!template_specifications) {
         return res.status(400).json({
           success: false,
-          error: 'Template name is required',
+          error: 'template_specifications is required',
         });
       }
 
@@ -31,14 +34,17 @@ class PDFController {
         });
       }
 
-      // Load translations if locale is provided
-      if (locale) {
+      const { id, folder, locale } = template_specifications;
+
+      // Load translations if locale is provided and labels don't exist in data
+      // This allows embedded labels in payload to take precedence
+      if (locale && !data.labels) {
         const translations = await this.translationService.getTranslations(locale);
         data.labels = translations;
       }
 
       // Load and compile template
-      const compiledTemplate = await loadTemplate(template);
+      const compiledTemplate = await loadTemplate(id, folder);
       const html = compiledTemplate(data);
 
       // Generate PDF
@@ -57,10 +63,20 @@ class PDFController {
   /**
    * Generate visit report PDF
    * POST /api/pdf/visit-report
+   * 
+   * Payload format:
+   * { template_specifications: { folder, id, locale }, data: {...}, options: {...} }
    */
   async generateVisitReport(req, res) {
     try {
-      const { data, options, locale } = req.body;
+      const { template_specifications, data, options } = req.body;
+
+      if (!template_specifications) {
+        return res.status(400).json({
+          success: false,
+          error: 'template_specifications is required',
+        });
+      }
 
       if (!data) {
         return res.status(400).json({
@@ -69,15 +85,18 @@ class PDFController {
         });
       }
 
-      // Load translations based on locale (default to 'en')
+      const { id, folder, locale } = template_specifications;
+
+      // Load translations if locale is provided and labels don't exist in data
+      // This allows embedded labels in payload to take precedence
       const selectedLocale = locale || 'en';
-      const translations = await this.translationService.getTranslations(selectedLocale);
-      
-      // Inject translations into data
-      data.labels = translations;
+      if (!data.labels) {
+        const translations = await this.translationService.getTranslations(selectedLocale);
+        data.labels = translations;
+      }
 
       // Load and compile template
-      const compiledTemplate = await loadTemplate('visit-report');
+      const compiledTemplate = await loadTemplate(id, folder);
       const html = compiledTemplate(data);
 
       // Generate PDF

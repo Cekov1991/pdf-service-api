@@ -88,10 +88,16 @@ class PDFService {
   /**
    * Load and compile a template
    * @param {string} templateName - Name of the template file (without .html)
+   * @param {string} folder - Optional folder within templates directory
    * @returns {Function} Compiled Handlebars template
    */
-  async loadTemplate(templateName) {
-    const templatePath = path.join(this.templatesPath, `${templateName}.html`);
+  async loadTemplate(templateName, folder = null) {
+    let templatePath;
+    if (folder) {
+      templatePath = path.join(this.templatesPath, folder, `${templateName}.html`);
+    } else {
+      templatePath = path.join(this.templatesPath, `${templateName}.html`);
+    }
     const templateContent = await fs.readFile(templatePath, 'utf-8');
     return Handlebars.compile(templateContent);
   }
@@ -227,9 +233,14 @@ class PDFService {
 }
 
 // Helper function to load template (can be used outside class)
-export async function loadTemplate(templateName) {
+export async function loadTemplate(templateName, folder = null) {
   const templatesPath = path.join(path.dirname(__filename), '..', 'templates');
-  const templatePath = path.join(templatesPath, `${templateName}.html`);
+  let templatePath;
+  if (folder) {
+    templatePath = path.join(templatesPath, folder, `${templateName}.html`);
+  } else {
+    templatePath = path.join(templatesPath, `${templateName}.html`);
+  }
   const templateContent = await fs.readFile(templatePath, 'utf-8');
   return Handlebars.compile(templateContent);
 }

@@ -1,0 +1,209 @@
+{
+  "template_specifications": {
+    "folder": "reports",
+    "id": "anamnesis",
+    "locale": "en"
+  },
+  "data": {
+    "visit_report": "Visit Report",
+    "generated_on": "Generated on",
+    "patient_information": "Patient Information",
+    "full_name": "Full Name",
+    "dob": "Date of Birth",
+    "sex": "Sex",
+    "unique_master_citizen_number": "Citizen Number",
+    "phone": "Phone",
+    "email": "Email",
+    "visit_information": "Visit Information",
+    "scheduled_at": "Scheduled At",
+    "type": "Type",
+    "status": "Status",
+    "doctor": "Doctor",
+    "reason_for_visit": "Reason for Visit",
+    "anamnesis": "Anamnesis",
+    "chief_complaint": "Chief Complaint",
+    "history_of_present_illness": "History of Present Illness",
+    "past_medical_history": "Past Medical History",
+    "family_history": "Family History",
+    "medications_current": "Current Medications",
+    "allergies": "Allergies",
+    "therapy_in_use": "Therapy in Use",
+    "other_notes": "Other Notes",
+    "no_anamnesis_recorded": "No anamnesis recorded",
+    "examination": "Ophthalmic Examination",
+    "visus_od": "Visus OD (Right Eye)",
+    "visus_os": "Visus OS (Left Eye)",
+    "iop_od": "IOP OD",
+    "iop_os": "IOP OS",
+    "anterior_segment_findings_od": "Anterior Segment Findings OD",
+    "anterior_segment_findings_os": "Anterior Segment Findings OS",
+    "posterior_segment_findings_od": "Posterior Segment Findings OD",
+    "posterior_segment_findings_os": "Posterior Segment Findings OS",
+    "refraction_title": "Refraction Data",
+    "eye": "Eye",
+    "method": "Method",
+    "sphere": "Sphere",
+    "cylinder": "Cylinder",
+    "axis": "Axis",
+    "add_power": "Add Power",
+    "notes": "Notes",
+    "no_examination_recorded": "No examination recorded",
+    "diagnoses": "Diagnoses",
+    "code": "Code",
+    "term": "Term",
+    "onset_date": "Onset Date",
+    "is_primary": "Primary",
+    "yes": "Yes",
+    "no": "No",
+    "no_diagnoses_recorded": "No diagnoses recorded",
+    "imaging": "Imaging Studies",
+    "modality": "Modality",
+    "imaging_status": "Status",
+    "findings": "Findings",
+    "no_imaging_recorded": "No imaging studies recorded",
+    "treatments": "Treatment Plans",
+    "plan_type": "Plan Type",
+    "recommendation": "Recommendation",
+    "details": "Details",
+    "planned_date": "Planned Date",
+    "no_treatments_recorded": "No treatments recorded",
+    "prescriptions": "Prescriptions",
+    "prescription": "Prescription",
+    "medication_name": "Medication",
+    "dosage": "Dosage",
+    "frequency": "Frequency",
+    "duration": "Duration",
+    "instructions": "Instructions",
+    "no_prescriptions_recorded": "No prescriptions recorded",
+    "spectacles": "Spectacle Prescriptions",
+    "add": "Add",
+    "prism": "Prism",
+    "pd": "PD",
+    "no_spectacles_recorded": "No spectacle prescriptions recorded",
+    "doctor_signature": "Doctor's Signature",
+    "date": "Date",
+    "generated_at": "07/11/2025 14:30",
+    "current_date": "07/11/2025",
+    "patient": {
+      "full_name": "John Michael Doe",
+      "dob": "15/05/1985",
+      "sex": "Male",
+      "unique_master_citizen_number": "1234567890123",
+      "phone": "+1 (555) 123-4567",
+      "email": "john.doe@example.com"
+    },
+    "visit": {
+      "scheduled_at": "07/11/2025 10:30",
+      "type": "Regular Checkup",
+      "status": "Completed",
+      "reason_for_visit": "Annual eye examination and vision assessment"
+    },
+    "doctor": {
+      "name": "Dr. Sarah Michelle Johnson"
+    },
+    "anamnesis": {
+      "chief_complaint": "Blurred vision when reading, especially in low light conditions.",
+      "history_of_present_illness": "Patient has noticed progressive difficulty with near vision over the past 3 months.",
+      "past_medical_history": "Hypertension (controlled with medication), Type 2 Diabetes",
+      "family_history": "Mother had glaucoma, Father had macular degeneration",
+      "medications_current": "Metformin 500mg twice daily, Lisinopril 10mg once daily",
+      "allergies": "Penicillin (rash), Sulfa drugs (hives)",
+      "therapy_in_use": "Reading glasses +1.50 (prescribed 2 years ago)",
+      "other_notes": "Patient is a software developer, spends 8-10 hours daily on computer."
+    },
+    "ophthalmic_exam": {
+      "visus_od": "20/25",
+      "visus_os": "20/30",
+      "iop_od": "15 mmHg",
+      "iop_os": "16 mmHg",
+      "anterior_segment_findings_od": "Clear cornea, deep and quiet anterior chamber",
+      "anterior_segment_findings_os": "Clear cornea, deep and quiet anterior chamber",
+      "posterior_segment_findings_od": "Optic disc: Pink, well-defined margins",
+      "posterior_segment_findings_os": "Optic disc: Pink, well-defined margins",
+      "refractions": [
+        {
+          "eye": "OD (Right)",
+          "method": "Autorefraction",
+          "sphere": "+0.75",
+          "cylinder": "-0.50",
+          "axis": "90",
+          "add_power": "+2.00",
+          "notes": "Patient reports improved clarity"
+        },
+        {
+          "eye": "OS (Left)",
+          "method": "Autorefraction",
+          "sphere": "+1.00",
+          "cylinder": "-0.75",
+          "axis": "85",
+          "add_power": "+2.00",
+          "notes": "Patient reports improved clarity"
+        }
+      ]
+    },
+    "diagnoses": [
+      {
+        "code": "H52.4",
+        "term": "Presbyopia",
+        "onset_date": "15/08/2025",
+        "is_primary": true,
+        "notes": "Age-related loss of accommodation"
+      }
+    ],
+    "imaging_studies": [
+      {
+        "modality": "OCT (Optical Coherence Tomography)",
+        "eye": "Both Eyes",
+        "status": "Completed",
+        "findings": "Normal macular thickness bilaterally."
+      }
+    ],
+    "treatment_plans": [
+      {
+        "plan_type": "Optical Correction",
+        "recommendation": "New spectacle prescription",
+        "details": "Progressive lenses recommended",
+        "start_date": "07/11/2025"
+      }
+    ],
+    "prescriptions": [
+      {
+        "notes": "For dry eye symptoms",
+        "prescription_items": [
+          {
+            "medication_name": "Artificial Tears",
+            "dosage": "1-2 drops",
+            "frequency": "4 times daily",
+            "duration": "Ongoing",
+            "instructions": "Use before computer work"
+          }
+        ]
+      }
+    ],
+    "spectacle_prescriptions": [
+      {
+        "eye": "OD (Right)",
+        "sphere": "+0.75",
+        "cylinder": "-0.50",
+        "axis": "90",
+        "add_power": "+2.00",
+        "prism": "—",
+        "pupillary_distance": "32mm"
+      },
+      {
+        "eye": "OS (Left)",
+        "sphere": "+1.00",
+        "cylinder": "-0.75",
+        "axis": "85",
+        "add_power": "+2.00",
+        "prism": "—",
+        "pupillary_distance": "32mm"
+      }
+    ]
+  },
+  "options": {
+    "format": "A4",
+    "landscape": false
+  }
+}
+

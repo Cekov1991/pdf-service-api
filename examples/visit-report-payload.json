@@ -1,5 +1,9 @@
 {
-  "locale": "en",
+  "template_specifications": {
+    "folder": "reports",
+    "id": "1",
+    "locale": "en"
+  },
   "data": {
       "visit_report": "Visit Report",
       "generated_on": "Generated on",
@@ -77,8 +81,7 @@
       "pd": "PD",
       "no_spectacles_recorded": "No spectacle prescriptions recorded",
       "doctor_signature": "Doctor's Signature",
-      "date": "Date"
-    },
+      "date": "Date",
     "generated_at": "07/11/2025 14:30",
     "current_date": "07/11/2025",
     "patient": {
@@ -242,5 +245,3 @@
     "landscape": false
   }
 }
-
-

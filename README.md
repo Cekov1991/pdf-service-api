@@ -11,6 +11,8 @@ A professional PDF generation service built with Node.js, Express, and Puppeteer
 - 📦 **Base64 Output** - Returns PDFs as base64 strings (easily extensible to other formats)
 - 🎯 **Easy to Extend** - Clean architecture for adding new templates
 - 🏥 **Medical Document Ready** - Includes comprehensive visit report template
+- 📁 **Flexible Template Organization** - Support for folder-based template structure with new payload format
+- 🌍 **Multi-language Support** - Embedded translations or locale-based translation files
 
 ## Prerequisites
 
@@ -108,7 +110,7 @@ POST /api/pdf/visit-report
 }
 ```
 
-See `examples/visit-report-payload.json` for a complete example.
+See `examples/visit-report-payload-new-format.json` for a complete example with the `template_specifications` format.
 
 **Response:**
 ```json
@@ -133,7 +135,11 @@ POST /api/pdf/generate
 **Request Body:**
 ```json
 {
-  "template": "visit-report",
+  "template_specifications": {
+    "folder": "reports",
+    "id": "anamnesis",
+    "locale": "en"
+  },
   "data": { ... },
   "options": {
     "format": "A4",
@@ -147,6 +153,8 @@ POST /api/pdf/generate
   }
 }
 ```
+
+📖 **See [NEW-PAYLOAD-FORMAT.md](NEW-PAYLOAD-FORMAT.md) for detailed documentation on the payload structure.**
 
 ---
 

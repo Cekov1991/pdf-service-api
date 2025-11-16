@@ -1,5 +1,6 @@
 import express from 'express';
 import pdfController from '../controllers/pdfController.js';
+import { validatePayloadSize, validatePDFOptions, validateTemplateSpecs } from '../middlewares/validation.js';
 
 const router = express.Router();
 
@@ -7,16 +8,38 @@ const router = express.Router();
 router.get('/health', (req, res) => pdfController.healthCheck(req, res));
 
 // Generic PDF generation from template
-router.post('/pdf/generate', (req, res) => pdfController.generatePDF(req, res));
+router.post(
+  '/pdf/generate',
+  validatePayloadSize,
+  validateTemplateSpecs,
+  validatePDFOptions,
+  (req, res) => pdfController.generatePDF(req, res)
+);
 
 // Specific template endpoints
-router.post('/pdf/visit-report', (req, res) => pdfController.generateVisitReport(req, res));
+router.post(
+  '/pdf/visit-report',
+  validatePayloadSize,
+  validateTemplateSpecs,
+  validatePDFOptions,
+  (req, res) => pdfController.generateVisitReport(req, res)
+);
 
 // Generate from raw HTML
-router.post('/pdf/from-html', (req, res) => pdfController.generateFromHTML(req, res));
+router.post(
+  '/pdf/from-html',
+  validatePayloadSize,
+  validatePDFOptions,
+  (req, res) => pdfController.generateFromHTML(req, res)
+);
 
 // Generate from URL
-router.post('/pdf/from-url', (req, res) => pdfController.generateFromURL(req, res));
+router.post(
+  '/pdf/from-url',
+  validatePayloadSize,
+  validatePDFOptions,
+  (req, res) => pdfController.generateFromURL(req, res)
+);
 
 export default router;
 
