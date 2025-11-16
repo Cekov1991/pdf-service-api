@@ -1,10 +1,11 @@
 {
   "template_specifications": {
     "folder": "reports",
-    "id": "1",
+    "id": "anamnesis",
     "locale": "en"
   },
   "data": {
+    "labels": {
       "visit_report": "Visit Report",
       "generated_on": "Generated on",
       "patient_information": "Patient Information",
@@ -81,7 +82,8 @@
       "pd": "PD",
       "no_spectacles_recorded": "No spectacle prescriptions recorded",
       "doctor_signature": "Doctor's Signature",
-      "date": "Date",
+      "date": "Date"
+    },
     "generated_at": "07/11/2025 14:30",
     "current_date": "07/11/2025",
     "patient": {

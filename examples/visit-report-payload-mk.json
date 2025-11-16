@@ -1,5 +1,9 @@
 {
-  "locale": "mk",
+  "template_specifications": {
+    "folder": "reports",
+    "id": "anamnesis",
+    "locale": "mk"
+  },
   "data": {
     "generated_at": "07/11/2025 14:30",
     "current_date": "07/11/2025",
