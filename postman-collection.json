@@ -1,6 +1,6 @@
 {
   "info": {
-    "name": "PDF Service API (v2 - Template Specifications)",
+    "name": "PDF Service API",
     "description": "PDF generation service with template_specifications format",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "pdf-service-api"
