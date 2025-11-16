@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "PDF Service API",
-    "description": "Essential PDF generation endpoints",
+    "description": "Essential PDF generation API - Health check and template-based PDF generation",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "pdf-service-api"
   },
@@ -91,95 +91,6 @@
           ]
         },
         "description": "Generate PDF from template with complete medical data. Supports folder-based templates, locales, and all options."
-      },
-      "response": []
-    },
-    {
-      "name": "Generate from HTML",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test(\"Response contains PDF\", function () {",
-              "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.success).to.be.true;",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"html\": \"<!DOCTYPE html><html><head><title>Test PDF</title><style>body { font-family: Arial, sans-serif; padding: 20px; } h1 { color: #4f46e5; }</style></head><body><h1>Test PDF Document</h1><p>This is a test PDF generated from raw HTML.</p><ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul></body></html>\",\n  \"options\": {\n    \"format\": \"A4\",\n    \"landscape\": false,\n    \"margin\": {\n      \"top\": \"20mm\",\n      \"right\": \"20mm\",\n      \"bottom\": \"20mm\",\n      \"left\": \"20mm\"\n    }\n  }\n}"
-        },
-        "url": {
-          "raw": "{{baseUrl}}/api/pdf/from-html",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "pdf",
-            "from-html"
-          ]
-        },
-        "description": "Generate PDF from raw HTML string"
-      },
-      "response": []
-    },
-    {
-      "name": "Generate from URL",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"url\": \"https://example.com\",\n  \"options\": {\n    \"format\": \"A4\",\n    \"landscape\": false\n  }\n}"
-        },
-        "url": {
-          "raw": "{{baseUrl}}/api/pdf/from-url",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "pdf",
-            "from-url"
-          ]
-        },
-        "description": "Generate PDF from a URL"
       },
       "response": []
     }

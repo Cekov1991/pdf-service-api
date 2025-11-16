@@ -61,60 +61,6 @@ class PDFController {
   }
 
   /**
-   * Generate PDF from raw HTML
-   * POST /api/pdf/from-html
-   */
-  async generateFromHTML(req, res) {
-    try {
-      const { html, options } = req.body;
-
-      if (!html) {
-        return res.status(400).json({
-          success: false,
-          error: 'HTML content is required',
-        });
-      }
-
-      const result = await this.pdfService.generateFromHTML(html, options || {});
-
-      res.json(result);
-    } catch (error) {
-      console.error('Error generating PDF from HTML:', error);
-      res.status(500).json({
-        success: false,
-        error: error.message || 'Failed to generate PDF from HTML',
-      });
-    }
-  }
-
-  /**
-   * Generate PDF from URL
-   * POST /api/pdf/from-url
-   */
-  async generateFromURL(req, res) {
-    try {
-      const { url, options } = req.body;
-
-      if (!url) {
-        return res.status(400).json({
-          success: false,
-          error: 'URL is required',
-        });
-      }
-
-      const result = await this.pdfService.generateFromURL(url, options || {});
-
-      res.json(result);
-    } catch (error) {
-      console.error('Error generating PDF from URL:', error);
-      res.status(500).json({
-        success: false,
-        error: error.message || 'Failed to generate PDF from URL',
-      });
-    }
-  }
-
-  /**
    * Health check endpoint
    * GET /api/health
    */
