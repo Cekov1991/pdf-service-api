@@ -42,7 +42,6 @@ Default `.env` contents:
 PORT=3000
 NODE_ENV=development
 PDF_TIMEOUT=30000
-PDF_HEADLESS=true
 CORS_ORIGIN=*
 RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100
@@ -312,7 +311,7 @@ pdf-service-api/
 │   ├── middlewares/
 │   │   ├── errorHandler.js        # Error handling
 │   │   └── validation.js          # Input validation
-│   └── server.js                  # Express app setup
+│   └── index.js                   # Express app setup
 ├── examples/
 │   └── visit-report-payload.json  # Example payloads
 ├── package.json
@@ -404,7 +403,7 @@ This service is designed to be easily extended with:
 
 ```bash
 npm install -g pm2
-pm2 start src/server.js --name pdf-service
+pm2 start src/index.js --name pdf-service
 pm2 save
 pm2 startup
 ```
@@ -422,7 +421,7 @@ npm install puppeteer --unsafe-perm=true
 
 Increase Node.js memory:
 ```bash
-node --max-old-space-size=4096 src/server.js
+node --max-old-space-size=4096 src/index.js
 ```
 
 ### Font Issues in PDFs

@@ -2,11 +2,11 @@
   "name": "pdf-service-api",
   "version": "1.0.0",
   "description": "Professional PDF generation service using Node.js, Express, and Puppeteer",
-  "main": "src/server.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "node src/test/testPDF.js"
   },
   "keywords": [
