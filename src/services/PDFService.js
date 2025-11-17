@@ -1,4 +1,5 @@
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
+import chromium from 'chrome-aws-lambda';
 import Handlebars from 'handlebars';
 import fs from 'fs/promises';
 import path from 'path';
@@ -17,18 +18,34 @@ class PDFService {
   /**
    * Initialize Puppeteer browser instance
    * Reuses the same browser for better performance
+   * Uses chrome-aws-lambda for Vercel/serverless compatibility
    */
   async initBrowser() {
     if (!this.browser) {
-      this.browser = await puppeteer.launch({
-        headless: process.env.PDF_HEADLESS !== 'false',
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-gpu',
-        ],
-      });
+      const isProduction = process.env.NODE_ENV === 'production';
+      const isVercel = process.env.VERCEL === '1';
+
+      if (isProduction || isVercel) {
+        // Serverless environment (Vercel)
+        this.browser = await puppeteer.launch({
+          args: chromium.args,
+          executablePath: await chromium.executablePath,
+          headless: chromium.headless,
+        });
+      } else {
+        // Local development
+        this.browser = await puppeteer.launch({
+          headless: 'new',
+          executablePath: process.env.CHROME_PATH || 
+            '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+          args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+          ],
+        });
+      }
     }
     return this.browser;
   }
