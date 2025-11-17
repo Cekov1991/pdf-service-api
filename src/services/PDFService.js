@@ -21,7 +21,7 @@ class PDFService {
   async initBrowser() {
     if (!this.browser) {
       this.browser = await puppeteer.launch({
-        headless: process.env.PDF_HEADLESS !== 'false',
+        headless: 'new',
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
